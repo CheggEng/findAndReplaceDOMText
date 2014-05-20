@@ -113,7 +113,8 @@ window.findAndReplaceDOMText = (function() {
 		this.reverts = [];
 
 		this.matches = this.search();
-
+		this.boundaries = [];
+		
 		if (this.matches.length) {
 			this.processMatches();
 		}
@@ -268,6 +269,11 @@ window.findAndReplaceDOMText = (function() {
 				doAvoidNode = curNode.nodeType === 1 && elementFilter && !elementFilter(curNode);
 
 				if (startPortion && endPortion) {
+					
+					this.boundaries.push({
+						start : startPortion,
+						end : endPortion
+					});
 
 					curNode = this.replaceMatch(match, startPortion, innerPortions, endPortion);
 
